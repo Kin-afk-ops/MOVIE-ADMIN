@@ -6,18 +6,18 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./deleteModal.scss";
 
-import axiosInstance from "../../config";
+import { userRequest } from "../../config";
 
 const DeleteModal = ({ id, name, deleteMode, setDeleteMode, type }) => {
   const navigate = useNavigate();
   const handleDelete = async () => {
     try {
       if (type === "phim") {
-        const res = await axiosInstance.delete(`/movie/${id}`);
+        const res = await userRequest.delete(`/movie/${id}`);
       } else if (type === "danh mục") {
-        const res = await axiosInstance.delete(`/categories/${id}`);
+        const res = await userRequest.delete(`/categories/${id}`);
       } else {
-        const res = await axiosInstance.delete(`/country/${id}`);
+        const res = await userRequest.delete(`/country/${id}`);
       }
       navigate(0);
       toast.success(`Đã xoá ${type} ${name}`);

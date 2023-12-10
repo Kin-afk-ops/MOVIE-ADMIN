@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/grid.css";
@@ -8,8 +13,15 @@ import Home from "./page/home/Home";
 import Movies from "./page/movies/Movies";
 import Categories from "./page/categories/Categories";
 import Countries from "./page/countries/Countries";
+import Login from "./page/login/Login";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const user = useSelector((state) => state.user.currentUser);
+  user && window.localStorage.setItem("token", user.accessToken);
+
+  console.log(user);
+
   const Layout = () => {
     return (
       <div className="grid">
@@ -31,22 +43,27 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: !user ? <Navigate to="/login" /> : <Home />,
         },
 
         {
           path: "/movies",
-          element: <Movies />,
+          element: !user ? <Navigate to="/login" /> : <Movies />,
         },
 
         {
           path: "/categories",
-          element: <Categories />,
+          element: !user ? <Navigate to="/login" /> : <Categories />,
         },
 
         {
           path: "/countries",
-          element: <Countries />,
+          element: !user ? <Navigate to="/login" /> : <Countries />,
+        },
+
+        {
+          path: "/login",
+          element: user ? <Navigate to="/" /> : <Login />,
         },
       ],
     },
