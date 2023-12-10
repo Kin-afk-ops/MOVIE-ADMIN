@@ -1,14 +1,16 @@
 import "./pagination.scss";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
 
-const Pagination = ({ totalPage, currentPage }) => {
+const Pagination = ({ page, totalPage, currentPage }) => {
+  const navigate = useNavigate();
+
   const handlePageClick = (data) => {
-    console.log(data);
     window.scrollTo({
       top: 0,
       // behavior: "smooth",
     });
-    router.push(`/danh-sach/${type}/${path}?page=${data.selected + 1}`);
+    navigate(`/${page}?page=${data.selected + 1}`);
   };
 
   return (

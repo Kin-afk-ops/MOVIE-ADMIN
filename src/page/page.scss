@@ -1,0 +1,19 @@
+.element {
+  margin-top: 50px;
+  .header {
+    margin-bottom: 30px;
+    background-color: var(--element-color);
+    padding: 20px 0;
+
+    h1 {
+      font-weight: 600;
+    }
+  }
+
+  .btn {
+    button {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+  }
+}

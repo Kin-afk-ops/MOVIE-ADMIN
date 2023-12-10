@@ -1,26 +1,21 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.scss";
 
 const Navbar = () => {
-  const logoutRef = useRef(null);
-
-  const handleLog = (e) => {
-    e.target.classList.toggle("adminActive");
-    logoutRef.current.classList.toggle("hidden");
-    logoutRef.current.classList.toggle("display__flex");
-  };
+  const [navActive, setNavActive] = useState(false);
 
   return (
     <div className="navbar">
       <h2>CÔNG VIỆC</h2>
-      <div className="navbarAdmin" onClick={(e) => handleLog(e)}>
+      <div
+        className={navActive ? "navbarAdmin adminActive" : "navbarAdmin"}
+        onClick={() => setNavActive(!navActive)}
+      >
         ADMIN ĐẸP TRAI
         <i class="fa-solid fa-caret-down"></i>
       </div>
-      <div className="hidden navbarLogout" ref={logoutRef}>
-        Đăng xuất
-      </div>
+      <div className={navActive ? "navbarLogout" : "hidden"}>Đăng xuất</div>
 
       <ul>
         <NavLink
@@ -35,7 +30,7 @@ const Navbar = () => {
           </li>
         </NavLink>
         <NavLink
-          to="/categories"
+          to="/categories?page=1"
           className={({ isActive }) =>
             isActive ? "link navbarActive" : "link"
           }
@@ -46,7 +41,7 @@ const Navbar = () => {
           </li>
         </NavLink>
         <NavLink
-          to="/countries"
+          to="/countries?page=1"
           className={({ isActive }) =>
             isActive ? "link navbarActive" : "link"
           }

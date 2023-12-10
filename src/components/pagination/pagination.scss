@@ -9,14 +9,13 @@
     justify-content: center;
 
     .active {
-      color: #00ffff;
-      background-color: black;
+      color: #0033ff;
     }
 
     li {
       cursor: pointer;
-      background-color: var(--background-color);
-      color: white;
+      background-color: var(--element-color);
+      color: black;
       border-radius: 5px;
       margin: 0 5px;
       border: 1px solid black;
@@ -28,6 +27,11 @@
         width: 40px;
         height: 40px;
       }
+    }
+    .prev,
+    .next {
+      text-decoration: none;
+      color: inherit;
     }
   }
 }

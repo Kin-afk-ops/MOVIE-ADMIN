@@ -6,7 +6,6 @@
   padding: 50px 0;
 
   h2 {
-    width: 80%;
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
     display: flex;
@@ -37,6 +36,7 @@
   .navbarLogout {
     width: 80%;
     cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px 0;

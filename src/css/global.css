@@ -26,6 +26,12 @@ body {
   display: flex;
 }
 
+.flex__center {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
 .link {
   text-decoration: none;
   color: inherit;
