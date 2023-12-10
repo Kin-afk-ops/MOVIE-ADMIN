@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./navbar.scss";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/userRedux";
 
 const Navbar = () => {
   const [navActive, setNavActive] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <div className="navbar">
@@ -15,7 +22,12 @@ const Navbar = () => {
         ADMIN ĐẸP TRAI
         <i class="fa-solid fa-caret-down"></i>
       </div>
-      <div className={navActive ? "navbarLogout" : "hidden"}>Đăng xuất</div>
+      <div
+        className={navActive ? "navbarLogout" : "hidden"}
+        onClick={handleLogout}
+      >
+        Đăng xuất
+      </div>
 
       <ul>
         <NavLink

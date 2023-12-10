@@ -21,10 +21,15 @@ const userSlice = createSlice({
       state.isError = true;
     },
 
-    reset: () => initialState,
+    logout: (state) => {
+      state.isFetching = false;
+      state.currentUser = null;
+      window.localStorage.removeItem("token");
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout } =
+  userSlice.actions;
 
 export default userSlice.reducer;
