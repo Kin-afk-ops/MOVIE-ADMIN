@@ -15,24 +15,37 @@ import Categories from "./page/categories/Categories";
 import Countries from "./page/countries/Countries";
 import Login from "./page/login/Login";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "./redux/userRedux";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
-  user && window.localStorage.setItem("token", user.accessToken);
+  const dispatch = useDispatch();
 
-  console.log(user);
+  if (user) {
+    setTimeout(() => {
+      dispatch(logout());
+    }, 3 * 24 * 60 * 60 * 1000);
+  }
 
   const Layout = () => {
     return (
       <div className="grid">
-        <div className="row no-gutters">
-          <div className="c-2">
-            <Navbar />
+        {user ? (
+          <div className="row no-gutters">
+            <div className="c-2">
+              {" "}
+              <Navbar />
+            </div>
+            <div className="c-10">
+              <Outlet />
+            </div>
           </div>
-          <div className="c-10">
+        ) : (
+          <div>
             <Outlet />
           </div>
-        </div>
+        )}
       </div>
     );
   };

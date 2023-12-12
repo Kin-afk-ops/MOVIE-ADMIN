@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
-import { userRequest } from "../../config";
+import axiosInstance from "../../config";
 
 import { toast } from "react-toastify";
 
@@ -47,26 +47,23 @@ const MovieForm = ({ mode, displayMode, setDisplayMode, id }) => {
         hot,
       };
 
-      try {
-        if (mode === "add") {
-          const res = await userRequest.post("/movie", newMovie);
+      if (mode === "add") {
+        const res = await axiosInstance.post("/movie", newMovie);
+        try {
           toast.success("Thêm phim thành công!");
           navigate(0);
-        } else {
-          const res = await userRequest.put(`/movie/${id}`, newMovie);
+          setDisplayMode(false);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        const res = await axiosInstance.put(`/movie/${id}`, newMovie);
+        try {
           toast.success("Sửa phim thành công!");
           navigate(0);
+        } catch (error) {
+          console.log(error);
         }
-
-        setDisplayMode(false);
-      } catch (error) {
-        if (mode === "add") {
-          toast.error("Thêm phim thấy bại!");
-        } else {
-          toast.error("Sửa phim thấy bại!");
-        }
-
-        console.log(error);
       }
     } else {
       toast.error("Có trường rỗng hãy kiểm tra lại!");
@@ -76,7 +73,7 @@ const MovieForm = ({ mode, displayMode, setDisplayMode, id }) => {
   useEffect(() => {
     const getMovie = async () => {
       if (mode === "edit") {
-        const res = await userRequest.get(`/movie/find/${id}`);
+        const res = await axiosInstance.get(`/movie/find/${id}`);
         console.log(res);
 
         setName(res.data.name);

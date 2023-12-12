@@ -24,7 +24,6 @@ const userSlice = createSlice({
     logout: (state) => {
       state.isFetching = false;
       state.currentUser = null;
-      window.localStorage.removeItem("token");
     },
   },
 });
